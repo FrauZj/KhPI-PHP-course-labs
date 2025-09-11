@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завантаження файлів</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-container { margin-bottom: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        h2 { color: #333; }
+        input[type="file"], input[type="text"], input[type="submit"] {
+            margin: 10px 0; padding: 8px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+<h1>Система завантаження файлів</h1>
+
+<!-- Форма для завантаження файлів -->
+<div class="form-container">
+    <h2>Завантажити файл</h2>
+    <form action="process.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" id="fileToUpload" required>
+        <br>
+        <input type="submit" value="Завантажити файл" name="submit">
+    </form>
+</div>
+
+<!-- Форма для запису тексту -->
+<div class="form-container">
+    <h2>Записати текст у файл</h2>
+    <form action="text.php" method="post">
+        <textarea name="textContent" rows="4" cols="50" placeholder="Введіть текст для запису..." required></textarea>
+        <br>
+        <input type="submit" value="Записати у файл" name="submitText">
+    </form>
+</div>
+
+<!-- Посилання на інші сторінки -->
+<div class="form-container">
+    <h2>Додаткові функції</h2>
+    <p><a href="text.php">Переглянути вміст log.txt</a></p>
+    <p><a href="list.php">Переглянути список файлів</a></p>
+</div>
+</body>
+</html>
