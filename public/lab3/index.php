@@ -1,6 +1,14 @@
 <?php
 session_start();
+
+// Обробка кнопки для демонстрації коду перенаправлення
+if (isset($_POST['show_redirect_code'])) {
+    header('Location: test_redirect.php');
+    exit;
+}
 const InactivityTime = 300;
+
+// Перевірка неактивності сесії
 $session_expired = false;
 if (isset($_SESSION['last_activity'])) {
     if (time() - $_SESSION['last_activity'] > InactivityTime) {
@@ -10,6 +18,7 @@ if (isset($_SESSION['last_activity'])) {
         session_start();
     }
 }
+
 
 $_SESSION['last_activity'] = time();
 
@@ -153,6 +162,20 @@ $initial_time_left = InactivityTime - (time() - $_SESSION['last_activity']);
             color: #666;
             margin-top: 10px;
         }
+        .redirect-button {
+            background: #337ab7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .redirect-button:hover {
+            background: #286090;
+        }
     </style>
 </head>
 <body>
@@ -191,7 +214,16 @@ $initial_time_left = InactivityTime - (time() - $_SESSION['last_activity']);
 <?php endif; ?>
 
 <h1>Робота з PHP Сесіями та Cookie</h1>
-
+<!-- Кнопка для демонстрації коду перенаправлення -->
+<div class="section">
+    <h2>Демонстрація механізму перенаправлення</h2>
+    <p>Поточий метод запиту: <strong><?php echo $_SERVER['REQUEST_METHOD']; ?></strong></p>
+    <form method="post">
+        <button type="submit" name="show_redirect_code" class="redirect-button">
+            Перенаправлення
+        </button>
+    </form>
+</div>
 <!-- Індикатор активності сесії -->
 <div class="section">
     <h2>Статус сесії</h2>
