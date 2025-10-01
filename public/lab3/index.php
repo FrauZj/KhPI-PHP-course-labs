@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-// Обробка кнопки для демонстрації коду перенаправлення
 if (isset($_POST['show_redirect_code'])) {
     header('Location: test_redirect.php');
     exit;
 }
 const InactivityTime = 300;
 
-// Перевірка неактивності сесії
 $session_expired = false;
 if (isset($_SESSION['last_activity'])) {
     if (time() - $_SESSION['last_activity'] > InactivityTime) {
@@ -22,13 +20,11 @@ if (isset($_SESSION['last_activity'])) {
 
 $_SESSION['last_activity'] = time();
 
-// Обробка кліку на повідомлення про неактивність
 if (isset($_GET['reload_after_inactivity'])) {
     header('Location: ' . str_replace('?reload_after_inactivity=1', '', $_SERVER['REQUEST_URI']));
     exit;
 }
 
-// Обробка cookie для імені
 if (isset($_POST['set_name'])) {
     $username = htmlspecialchars(trim($_POST['username']));
     setcookie('user_name', $username, time() + (7 * 24 * 60 * 60), '/');
@@ -42,7 +38,6 @@ if (isset($_POST['delete_cookie'])) {
     exit;
 }
 
-// Обробка форми входу
 if (isset($_POST['login'])) {
     $login = htmlspecialchars(trim($_POST['login']));
     $password = htmlspecialchars(trim($_POST['password']));
@@ -60,7 +55,6 @@ if (isset($_POST['login'])) {
     }
 }
 
-// Вихід з системи
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
@@ -68,7 +62,6 @@ if (isset($_POST['logout'])) {
     exit;
 }
 
-// Обробка корзини покупок
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -89,7 +82,7 @@ if (isset($_POST['clear_cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Розрахунок часу для JavaScript
+
 $initial_time_left = InactivityTime - (time() - $_SESSION['last_activity']);
 ?>
 <!DOCTYPE html>

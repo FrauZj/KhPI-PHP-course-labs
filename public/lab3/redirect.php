@@ -1,10 +1,7 @@
 <?php
-// redirect.php
 session_start();
 
-// Запобігаємо нескінченному перенаправленню
 if (isset($_GET['redirected'])) {
-    // Можна показати повідомлення про перенаправлення
     $message = "Ви були перенаправлені, оскільки метод запиту не був POST.";
 } else {
     header('Location: redirect.php?redirected=1');
